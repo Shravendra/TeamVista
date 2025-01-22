@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from src.utils.database import engine, Base
+from src.models import user, team, work_stage, city 
 from src.routes import auth, user_routes, team_routes, city_routes
 
-# Initialize FastAPI app
 app = FastAPI(
     title="Smart Dashboard",
     description="API for managing employee status and process tracking",
