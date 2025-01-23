@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from src.utils.database import Base
 
@@ -21,7 +21,13 @@ class Employee(Base):
     employee_id = Column(String, unique=True, nullable=False)
     enterprise_id = Column(String, unique=True, nullable=False)
     address = Column(String, nullable=True)
-    citrix_id = Column(String, unique=True, nullable=True)
+    city_id = Column(String, unique=True, nullable=True)
+    doj = Column(Date, nullable=True)
+    dob = Column(Date, nullable=True)
+    skills = Column(String, nullable=True)
+    tools_access = Column(String, nullable=True)
+    score_card = Column(String, nullable=True)
+    attendance = Column(String, nullable=True)
     team_id = Column(Integer, ForeignKey('teams.id'), nullable=False)
     
     team = relationship("Team", back_populates="employees")

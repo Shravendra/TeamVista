@@ -8,6 +8,16 @@ router = APIRouter()
 
 @router.post("/login")
 def login(username: str, password: str, db: Session = Depends(get_db)):
+    """Login route for users to authenticate and receive an access token
+    Args:
+        username (str): The username of the user
+        password (str): The password of the user
+        db (Session, optional): The database session. Defaults to Depends(get_db).
+    Returns:
+        dict: The access token.
+    Raises:
+        HTTPException: If the credentials are invalid.
+    """
     user = db.query(User).filter(User.username == username).first()
     if not user or not verify_password(password, user.password):
         raise HTTPException(status_code=400, detail="Invalid credentials")

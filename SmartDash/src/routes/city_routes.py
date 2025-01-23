@@ -10,12 +10,12 @@ router = APIRouter()
 
 @router.get("/", response_model=List[CityResponse])
 def get_cities(db: Session = Depends(get_db)):
-    """Get all cities"""
+    """Get all cities in the database with basic information only"""
     return city_service.get_all_cities(db)
 
 @router.get("/{city_id}", response_model=CityResponse)
 def get_city(city_id: int, db: Session = Depends(get_db)):
-    """Get a city by ID"""
+    """Get a city by ID with basic information only"""
     city = city_service.get_city_by_id(city_id, db)
     if not city:
         raise HTTPException(status_code=404, detail="City not found")
@@ -23,7 +23,7 @@ def get_city(city_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=CityResponse)
 def create_city(city: CityCreate, db: Session = Depends(get_db)):
-    """Create a new city"""
+    """Create a new city in the database with basic information only"""
     return city_service.create_city(db, city)
 
 @router.put("/{city_id}", response_model=CityResponse)
