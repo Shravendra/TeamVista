@@ -1,14 +1,14 @@
 from enum import Enum
 
 class WorkStageEnum(str, Enum):
-    CITY_ZONING = "City Zoning"
-    PRE_HLD = "Pre-HLD"
-    HLD_CPP = "HLD-CPP Submission"
-    IS_PP = "IS & PP Submission"
-    LLD = "LLD Submission"
-    AS_BUILT = "As Built LLD"
+    CITY_ZONING = "CITY_ZONING"
+    PRE_HLD = "PRE_HLD"
+    HLD_CPP = "HLD_CPP"
+    IS_PP = "IS_PP"
+    LLD = "LLD"
+    AS_BUILT = "AS_BUILT"
     GCOMS = "GCOMS"
-    BCN = "BCN activity"
+    BCN = "BCN"
 
 class UserRole(str, Enum):
     SME = "SME"

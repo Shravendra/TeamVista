@@ -8,7 +8,8 @@ class WorkStage(Base):
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     stage = Column(SQLEnum(WorkStageEnum), nullable=False)
-    city_id = Column(Integer, ForeignKey('city.id'), nullable=False)
+    city_id = Column(Integer, ForeignKey('cities.id'), nullable=False)
+    team_id = Column(Integer, ForeignKey('teams.id'), nullable=True)
     
     # Stage details
     l4_zoning = Column(String, nullable=True)
@@ -22,21 +23,25 @@ class WorkStage(Base):
     
     # Relationships
     city = relationship("City", back_populates="work_stages")
-    nbus = relationship("NBU", back_populates="stage")
-    daily_updates = relationship("DailyUpdate", back_populates="stage")
+    team = relationship("Team", back_populates="work_stages")
+    daily_trackers = relationship("DailyTracker", back_populates="stage")
 
-class DailyUpdate(Base):
-    __tablename__ = 'daily_updates'
+class DailyTracker(Base):
+    __tablename__ = 'daily_trackers'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
     date = Column(Date, nullable=False)
     resource_count = Column(Integer, nullable=False)
     leave_count = Column(Integer, nullable=False)
+    details = Column(String, nullable=True)
     stage_id = Column(Integer, ForeignKey('work_stages.id'), nullable=False)
     team_id = Column(Integer, ForeignKey('teams.id'), nullable=False)
+    employee_id = Column(Integer, ForeignKey('employees.id'), nullable=False)
     
-    stage = relationship("WorkStage", back_populates="daily_updates")
-    team = relationship("Team", back_populates="daily_updates")
+    stage = relationship("WorkStage", back_populates="daily_trackers")
+    team = relationship("Team", back_populates="daily_trackers")
+    employee = relationship("Employee", back_populates="daily_trackers")
+
 
 class ForecastData(Base):
     __tablename__ = 'forecast_data'

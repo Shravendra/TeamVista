@@ -1,15 +1,6 @@
 from pydantic import BaseModel, validator, Field
 from typing import List, Optional
-from enum import Enum
-
-class WorkStageEnum(str, Enum):
-    PRE_HLD = "Pre-HLD"
-    HLD_CPP = "HLD-CPP"
-    IS_PP = "IS & PP"
-    LLD = "LLD"
-    AS_BUILT = "As Built LLD"
-    GCOMS = "GCOMS"
-    BCN = "BCN"
+from src.utils.constant import WorkStageEnum
 
 class NBUBase(BaseModel):
     nbu_no: str

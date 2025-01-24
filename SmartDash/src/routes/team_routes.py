@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from src.utils.database import get_db
 from src.models.team import Team
-from src.dto.team_dto import TeamCreate, TeamResponse, TeamUpdate, EmployeeResponse, DailyTrackerResponse, ForecastResponse
+from src.dto.team_dto import TeamCreate, TeamResponse, TeamUpdate, EmployeeResponse, EmployeeResponse, DailyTrackerResponse, ForecastResponse
 from src.services import team_service
 
 router = APIRouter()
@@ -50,6 +50,8 @@ def get_team_employees(team_id: int, db: Session = Depends(get_db)):
     if not team:
         raise HTTPException(status_code=404, detail="Team not found")
     return team.employees
+
+
 
 @router.get("/{team_id}/daily-trackers", response_model=List[DailyTrackerResponse])
 def get_team_daily_trackers(team_id: int, db: Session = Depends(get_db)):

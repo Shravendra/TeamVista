@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from src.utils.database import engine, Base
-from src.models import user, team, work_stage, city 
-from src.routes import auth, user_routes, team_routes, city_routes
+from src.routes import auth, user_routes, team_routes, city_routes, employee_routes
 
 app = FastAPI(
     title="Smart Dashboard",
@@ -16,6 +15,7 @@ Base.metadata.create_all(bind=engine)
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(user_routes.router, prefix="/users", tags=["Users"])
 app.include_router(team_routes.router, prefix="/teams", tags=["Teams"])
+app.include_router(employee_routes.router, prefix="/employees", tags=["Employees"])
 app.include_router(city_routes.router, prefix="/cities", tags=["Cities"])
 
 @app.get("/")

@@ -24,11 +24,6 @@ def login(username: str, password: str, db: Session = Depends(get_db)):
     access_token = create_access_token(data={"sub": user.username, "role": user.role})
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.post("/mfa")
-def verify_mfa(mfa_code: str):
-    # Implement MFA verification logic here
-    pass
-
 @router.get("/logout")
 def logout():
     # Implement logout logic here
